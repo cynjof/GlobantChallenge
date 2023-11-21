@@ -1,0 +1,19 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    container_name: migration_db
+    environment:
+      - MYSQL_DATABASE=${DATABASE}
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - "./init_db:/docker-entrypoint-initdb.d"
+    ports:
+      - "3306:3306"
+  app:
+    image: python-docker
+    container_name: migration_api
+    ports:
+      - "5000:5000"

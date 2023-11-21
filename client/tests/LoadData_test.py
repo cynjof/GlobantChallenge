@@ -1,26 +1,26 @@
 import pandas as pd
 import pytest
-from scripts.LoadData import LoadData
+from scrpits.LoaderData import LoaderData
 
 
 class TestYourClass:
     @classmethod
     def setup_class(cls):
-        # Initialize an instance of YourClass with the path to a test CSV file
-        cls.your_instance = LoadData('/home/cynthia/PycharmProjects/GlobantChallenge/sources/departments.csv')
+        # Initialize an instance of of the class
+        cls.data = LoaderData('/home/cynthia/PycharmProjects/GlobantChallenge/sources/departments.csv')
 
     def test_ingest_data_successful(self):
-        # Call the ingest_data method
-        result = self.your_instance.ingest_data()
+        # Call the read_data_csv method
+        result = self.data.read_data_csv()
 
         # Assert that the result is a DataFrame
         assert isinstance(result, pd.DataFrame)
 
     def test_ingest_data_file_not_found(self):
         # Set the path to a non-existent file
-        self.your_instance.path_file = '/home/cynthia/PycharmProjects/GlobantChallenge/departments.csv'
+        self.data.path_file = '/home/cynthia/PycharmProjects/GlobantChallenge/departments.csv'
 
-        # Call the ingest_data method and expect it to raise FileNotFoundError
+        # Call the read_data_csv method and expect it to fail
         with pytest.raises(FileNotFoundError):
-            self.your_instance.ingest_data()
+            self.data.read_data_csv()
 

@@ -5,7 +5,12 @@ import csv
 class LoaderData:
 
     def read_data_csv(self, path_file: str, endpoint: str):
-
+        """
+        Read data from a csv file
+        :param path_file
+        :param endpoint
+        :return: dataframe
+        """
         print(f"It will be loaded the data from {path_file}")
         if endpoint == "departments":
             dataframe_data = pd.read_csv(path_file, names=["id", "department"])

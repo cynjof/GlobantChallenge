@@ -1,9 +1,9 @@
 import requests
 import logging
 
-API_JOBS = "http://192.168.1.5:5000/jobs"
-API_DEPARTMENTS = "http://192.168.1.5:5000/departments"
-API_EMPLOYEES = "http://192.168.1.5:5000/hired_employees"
+API_JOBS = "http://127.0.0.1:5000/jobs"
+API_DEPARTMENTS = "http://127.0.0.1:5000/departments"
+API_EMPLOYEES = "http://127.0.0.1:5000/hired_employees"
 
 
 class CallerApi:
@@ -16,6 +16,7 @@ class CallerApi:
         :param data_json: dict
         """
         for data in data_generator:
+            print(data)
             response = requests.post(url=API_DEPARTMENTS, json=data)
         return
 

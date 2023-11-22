@@ -16,11 +16,14 @@ class ClientDBMigration:
         parser.add_argument('--endpoint', dest='endpoint')
         return parser
 
-    def generete_batch(self, data_df):
-        for start in range(0, len(data_df), BATCH_SIZE):
-            end = min(len(data_df), start + BATCH_SIZE)
-            chunk_df = data_df[start:end]
-            yield chunk_df
+    def generete_batch(self, data_list):
+        if len(data_list) > 1000:
+            for start in range(0, len(data_list), BATCH_SIZE):
+                end = min(len(data_list), start + BATCH_SIZE)
+                chunk_df = data_list[start:end]
+                yield chunk_df
+        else:
+            yield data_list
 
     def call_client(self):
         # Get params
@@ -33,13 +36,10 @@ class ClientDBMigration:
         cleaned_df = cleaned_df.replace({np.nan: None})
 
         # Parse dataframe to dict
-        data_list_dict = TransformerData().parse_data_to_dict(cleaned_df)
+        data_list = TransformerData().parse_data_to_dict(cleaned_df)
 
-        # Check amount of records
-        if len(data_list_dict) > 1000:
-            chunk_df = self.generete_batch(data_list_dict)
-        else:
-            chunk_df = data_list_dict
+        # Chunk records
+        chunk_df = self.generete_batch(data_list)
 
         # Redirection to the correct endpoint and call api
         if parser.endpoint == "departments":

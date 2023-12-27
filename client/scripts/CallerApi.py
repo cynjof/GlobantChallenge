@@ -13,27 +13,26 @@ class CallerApi:
     def create_departments(self, data_generator):
         """
         Call the API
-        :param data_json: dict
+        :param data_generator: iterable
         """
         for data in data_generator:
-            print(data)
             response = requests.post(url=API_DEPARTMENTS, json=data)
-        return
+        return response
 
     def create_jobs(self, data_generator):
         """
         Call the API
-        :param data_json: dict
+        :param data_generator: iterable
         """
         for data in data_generator:
             response = requests.post(url=API_JOBS, json=data)
-        return
+        return response
 
     def create_hired_employees(self, data_generator):
         """
         Call the API
-        :param data_json: dict
+        :param data_generator: iterable
         """
         for data in data_generator:
             response = requests.post(url=API_EMPLOYEES, json=data)
-        return
+        return response

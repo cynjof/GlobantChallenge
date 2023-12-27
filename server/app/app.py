@@ -50,8 +50,8 @@ def add_department():
 
             db.session.add(department_row)
         db.session.commit()
-        response = [{'message': 'success'}, {'status': 200}]
-        return jsonify(response)
+        response = [{'message': 'success'}]
+        return jsonify(response), 200
     else:
         raise APIError("Bad Requests", 401)
 
@@ -65,8 +65,8 @@ def add_jobs():
                            job=job['job'])
             db.session.add(job_row)
         db.session.commit()
-        response = [{'message': 'success'}, {'status': 200}]
-        return jsonify(response)
+        response = [{'message': 'success'}]
+        return jsonify(response), 200
     else:
         raise APIError("Bad Requests", 401)
 
@@ -84,8 +84,8 @@ def add_hired_employees():
                                           job_id=employee["job_id"])
             db.session.add(employee_row)
         db.session.commit()
-        response = [{'message': 'success'}, {'status': 200}]
-        return jsonify(response)
+        response = [{'message': 'success'}]
+        return jsonify(response), 200
     else:
         raise APIError("Bad Requests", 401)
 

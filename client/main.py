@@ -11,12 +11,14 @@ BATCH_SIZE = 1000
 
 class ClientDBMigration:
     def get_config_params(self):
+        """Get params from CLI"""
         parser = argparse.ArgumentParser(description='Migration DB')
         parser.add_argument('--path_file', dest='path_file', default=None)
         parser.add_argument('--endpoint', dest='endpoint')
         return parser
 
     def generete_batch(self, data_list):
+        """Generate chunks of 1000 records per api call"""
         if len(data_list) > 1000:
             for start in range(0, len(data_list), BATCH_SIZE):
                 end = min(len(data_list), start + BATCH_SIZE)
@@ -26,6 +28,7 @@ class ClientDBMigration:
             yield data_list
 
     def call_client(self):
+        """The client to start the process"""
         # Get params
         parser = ClientDBMigration().get_config_params().parse_args()
         print(f"The path file to ingest: {parser.path_file}")

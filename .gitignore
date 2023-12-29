@@ -1,4 +1,4 @@
 __pycache__/
-../scripts/__pycache__/
-../../.idea/
-../../venv/
+/venv/
+/.idea/
+scripts/__pycache__/

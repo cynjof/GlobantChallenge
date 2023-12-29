@@ -5,6 +5,10 @@
 
 This document outlines the steps involved in a data processing pipeline that takes CSV data, performs a transformation, and inserts the processed data into a MySQL database via an API.
 
+To create items in the database call the main.py script by CLI with the command:
+
+```python3 main.py --path_file {pathto source data} --endpoint {name of endpoint}```
+
 ## Process Steps
 
 ### 1. Data Ingestion

@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-import requests
+from server.app.app import create_app, db
 
 def pytest_configure():
     pytest.df_departments = pd.DataFrame({'id': [1, 5, 9], 'department': ['sales', 'account', 'rrhh']})
@@ -37,4 +37,18 @@ def get_jobs():
 @pytest.fixture()
 def get_employees():
     yield pytest.list_dict_employees.copy()
+
+
+@pytest.fixture()
+def app():
+    app = create_app("sqlite://")
+
+    with app.app_context():
+        db.create_all()
+
+    yield app
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
 

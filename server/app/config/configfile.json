@@ -1,8 +1,0 @@
-{
-  "database_config": {
-    "host": "your_mysql_host",
-    "user": "your_mysql_user",
-    "password": "your_mysql_password",
-    "name": "your_mysql_database"
-  }
-}
